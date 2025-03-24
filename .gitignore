@@ -1,0 +1,8 @@
+*_test.go
+*txt
+cover
+*log
+data*.json
+users.json
+.vscode
+main.yml

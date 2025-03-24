@@ -1,0 +1,199 @@
+definitions:
+  domain.LS_Object:
+    properties:
+      address:
+        type: string
+      day_night_type:
+        type: string
+      device_guid:
+        type: string
+      device_number:
+        type: string
+      device_type:
+        type: string
+      last_metering:
+        type: number
+      num_ls:
+        type: integer
+      type:
+        type: string
+    type: object
+  helpers.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  helpers.SuscessResponse:
+    properties:
+      id:
+        type: string
+      message:
+        type: string
+    type: object
+  helpers.TokenResponse:
+    properties:
+      token:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: A comprehensive API for managing pets,
+  title: Pet Indication Management API
+  version: "1.0"
+paths:
+  /api/auth:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates the user using Basic Authentication and returns a
+        token.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful authentication, returns a token
+          schema:
+            $ref: '#/definitions/helpers.TokenResponse'
+        "401":
+          description: Unauthorized, invalid login or password
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+        "500":
+          description: Internal server error, couldn't generate token
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+      security:
+      - BasicAuth: []
+      summary: Authenticate User
+      tags:
+      - auth
+  /api/getObjectsByNumLS/{num_ls}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves objects based on the provided num ls.
+      parameters:
+      - description: Number LS
+        in: path
+        name: num_ls
+        required: true
+        type: integer
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            items:
+              $ref: '#/definitions/domain.LS_Object'
+            type: array
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+        "401":
+          description: Unauthorized, missing or invalid token
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Objects by Num LS
+      tags:
+      - objects
+  /api/id:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the ID and name based on query parameters.
+      parameters:
+      - description: User ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: User Name
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: User Age (optional)
+        in: query
+        name: age
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            $ref: '#/definitions/helpers.SuscessResponse'
+        "400":
+          description: Bad request due to missing or unexpected parameters
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+      summary: Get ID and Name Information
+      tags:
+      - user
+  /api/setMeterIndicationByGuid/{guid}/{meter}/{requestId}:
+    get:
+      consumes:
+      - application/json
+      description: Sets a meter indication based on the provided UUID.
+      parameters:
+      - description: Meter UUID
+        in: path
+        name: guid
+        required: true
+        type: string
+      - description: Meter
+        in: path
+        name: meter
+        required: true
+        type: string
+      - description: Request number
+        in: path
+        name: requestId
+        required: true
+        type: string
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully set meter indication
+          schema:
+            $ref: '#/definitions/helpers.SuscessResponse'
+        "400":
+          description: Invalid request parameters
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+        "401":
+          description: Unauthorized, missing or invalid token
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/helpers.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Set Meter Indication by UUID
+      tags:
+      - meters
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

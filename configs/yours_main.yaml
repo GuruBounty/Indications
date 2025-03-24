@@ -1,0 +1,10 @@
+Server:
+  name: "Your server"
+  port: Your server port  
+DB:
+  host: Your database connection
+  port: Your database port
+  db: Your database name
+  username: Your database username
+  password: Your database password
+  sslmode: Your database SSL mode

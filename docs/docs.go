@@ -120,57 +120,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/id": {
-            "get": {
-                "description": "Retrieves the ID and name based on query parameters.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get ID and Name Information",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "User Name",
-                        "name": "name",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "User Age (optional)",
-                        "name": "age",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "$ref": "#/definitions/helpers.SuscessResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request due to missing or unexpected parameters",
-                        "schema": {
-                            "$ref": "#/definitions/helpers.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
         "/api/setMeterIndicationByGuid/{guid}/{meter}/{requestId}": {
             "get": {
                 "security": [
@@ -320,7 +269,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Pet Indication Management API",
-	Description:      "A comprehensive API for managing pets,",
+	Description:      "A comprehensive API for managing pet project indications",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

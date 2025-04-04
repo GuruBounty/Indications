@@ -55,34 +55,10 @@ func (h *Handler) getObjectsByNumLS(w http.ResponseWriter, r *http.Request) {
 	}
 	if len(lsObject) == 0 {
 		helpers.ReturnResonse(w, fmt.Sprintf("LS %v not found", ls), http.StatusNotFound)
-		// w.WriteHeader(http.StatusNotFound)
-		// w.Header().Set("Content-Type", "application/json")
-		// fmt.Fprintf(w, `{"error": "Ls %v not found"}`, ls)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(lsObject)
-
-	// works with json file
-	// resp, err := h.indicationsService.GetObjectsByNumLS(context.TODO(), ls)
-	// if err != nil {
-	// 	if errors.Is(err, domain.ErrLSNotFound) {
-	// 		w.WriteHeader(http.StatusBadRequest)
-	// 		return
-	// 	}
-	// 	log.Println("getObjectByNumLS()  error:", err)
-	// 	w.WriteHeader(http.StatusInternalServerError)
-	// 	return
-	// }
-	// response, err := json.Marshal(resp)
-	// if err != nil {
-	// 	log.Println("getObjectByNumLS() error:", err)
-	// 	w.WriteHeader(http.StatusInternalServerError)
-	// 	return
-	// }
-	// w.WriteHeader(http.StatusOK)
-	// w.Header().Add("Content-Type", "application/json")
-	// w.Write(response)
 }
 
 func getSomeIntFromRequest(r *http.Request) (int64, error) {

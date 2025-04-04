@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "A comprehensive API for managing pets,",
+        "description": "A comprehensive API for managing pet project indications",
         "title": "Pet Indication Management API",
         "contact": {},
         "version": "1.0"
@@ -105,57 +105,6 @@
                     },
                     "500": {
                         "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/helpers.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/id": {
-            "get": {
-                "description": "Retrieves the ID and name based on query parameters.",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "user"
-                ],
-                "summary": "Get ID and Name Information",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "User ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "User Name",
-                        "name": "name",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "User Age (optional)",
-                        "name": "age",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful response",
-                        "schema": {
-                            "$ref": "#/definitions/helpers.SuscessResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request due to missing or unexpected parameters",
                         "schema": {
                             "$ref": "#/definitions/helpers.ErrorResponse"
                         }

@@ -6,3 +6,4 @@ data*.json
 users.json
 .vscode
 main.yml
+testdata

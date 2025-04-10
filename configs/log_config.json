@@ -1,0 +1,10 @@
+{
+    "log_dir":"logs",
+    "log_file": "app.log",
+    "log_level": "info",
+    "max_size": 10,
+    "max_backups": 5,
+    "max_age": 30,
+    "compress": true,
+    "format": "json"
+}

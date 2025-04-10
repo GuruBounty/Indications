@@ -27,7 +27,7 @@ import (
 const (
 	CONFIG_DIR      = "./configs"
 	CONFIG_FILE     = "main"
-	CONFIG_LOG_FILE = "log_config.json"
+	CONFIG_LOG_FILE = "./configs/log_config.json"
 )
 
 func init() {

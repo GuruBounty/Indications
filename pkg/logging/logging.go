@@ -31,6 +31,9 @@ func init() {
 // func InitLogger(path string, fileLog string) error {
 func InitLogger(configPath string) error {
 	//configPath := filepath.Join(path, fileLog)
+	if configPath == "" {
+		configPath = "./log_config.json"
+	}
 	configFile, err := os.Open(configPath)
 	if err != nil {
 		return err

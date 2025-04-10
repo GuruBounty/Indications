@@ -1,0 +1,33 @@
+#version: '3.8'
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 321
+      POSTGRES_DB: Indications
+    ports:
+      - "5555:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./datafordb/01_create_users_table.sql:/docker-entrypoint-initdb.d/01_create_users_table.sql
+
+  app:
+    build:
+      context: .
+    image: go_app_indication:1.0.9
+    container_name: go_app_indication
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5555
+      DB_USER: postgres
+      DB_PASSWORD: 321
+      DB_NAME: Indications
+    #command: ["/usr/local/bin/entrypoint.sh"]
+volumes:
+  pg_data:

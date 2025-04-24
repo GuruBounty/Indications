@@ -57,8 +57,13 @@ func (h *Handler) getObjectsByNumLS(w http.ResponseWriter, r *http.Request) {
 		helpers.ReturnResonse(w, fmt.Sprintf("LS %v not found", ls), http.StatusNotFound)
 		return
 	}
+
+	returnObject := helpers.Result{
+		Result: lsObject,
+	}
+
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(lsObject)
+	json.NewEncoder(w).Encode(returnObject)
 }
 
 func getSomeIntFromRequest(r *http.Request) (int64, error) {

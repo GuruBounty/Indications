@@ -1,5 +1,9 @@
 package helpers
 
+type Result struct {
+	Result any `json:"result"`
+}
+
 type ErrorResponse struct {
 	Error string `json:"error"`
 }

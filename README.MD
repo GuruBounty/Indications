@@ -12,49 +12,102 @@ __Authentication Process:__
 
 - Users authenticate through the `/api/auth` (POST) endpoint.
 
-- On successful authentication, a JSON Web Token (JWT) is issued, valid for 120 seconds. This token must be included in the headers of all subsequent API requests.
+- On successful authentication, a JSON Web Token (JWT) is issued, valid for 120 seconds. This token must be included in the headers of all subsequent API requests.  
+  ```json
+  {
+    "result": {
+      "token": "token"
+    }
+  }
+  ```
 
-- If authentication fails, the response includes a JSON message: 
-    ```json
-    {"message": "Invalid login or password"}
-    ``` 
-    and an HTTP `401` status.
+- If authentication fails, the response includes a JSON message:  
+  ```json
+      {
+    "result": {
+      "error": "Invalid login or password"
+      }
+    }
+  ``` 
+  and an HTTP `401` status.
 
 - If the JWT generation fails, the response includes: 
-    ```json
-    {"message": "Couldn't generate token"}
-    ```
-    and an HTTP `500` status.
+  ```json
+  {
+    "result": {
+      "error": "Couldn't generate token"
+      }
+  }
+  ```
+  and an HTTP `500` status.
 
  __Core Functionalities:__
 
  1. __Retrieve Meter Data:__            
     - Endpoint: `/api/getObjectsByNumLS` (GET).
     - Retrieves device details and the latest metering data using a provided `num_ls` parameter.
-    - On success, returns a JSON array containing information such as device address, type, last meter reading, etc.
+    - On success, returns a JSON array containing information such as device address, type, last meter reading, etc.  
+        ```json
+          {
+            "result": [
+              {
+                "num_ls": int,
+                "address": string,
+                "type": string,
+                "day_night_type": string,
+                "device_guid": string (UUID),
+                "device_type": string,
+                "last_metering": int,
+                "device_number": string
+              }
+            ]
+          }
+          ```
     - Possible errors:
       -  Missing token (HTTP 401): 
             ```json
-            {"error": "Missing authorization token"}
+            {
+              "result": {
+                "error": "Missing authorization token"
+              }
+            }
             ```
       - Invalid token (HTTP 401): 
         ```json
-        {"error": "Invalid token"}
+        {
+          "result": {
+              "error": "Invalid token"
+            }
+          }
         ```
       - Non-existent num_ls  (HTTP 404):
         ```json
-        {"error": "LS [num_ls] not found"}
+        {
+          "result": {
+            "error": "LS 111145 not found"
+          }
+        }
         ```
       - Database error: (HTTP 500) 
         ```json
-         {"error": "Database error"}
+        {
+          "result": {
+            "error": "Database error"
+          }
+        }
         ```
-2. __Submit Meter Readings:__
+         
+1. __Submit Meter Readings:__
    - Endpoint: `/api/setMeterIndicationByGuid` (GET)
    - Allows users to submit new metering data by providing device_guid, metering, and number_request.
    - On success, returns (HTTP 200): 
         ```json
-        {"id": "operation_id", "message": "true"}
+        {
+          "result": {
+            "id": int,
+            "message": bool
+          }
+        }
         ``` 
    - Possible errors:
       - Missing or invalid token, or non-existent device_guid, resulting in similar error patterns as described above.

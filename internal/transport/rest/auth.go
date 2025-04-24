@@ -28,7 +28,6 @@ func (h *Handler) authentication(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if ok && !checkCredentials(h, user, password) {
-		//w.Header().Set("WWW-Authenticate", `Basic realm="api"`)
 		helpers.ReturnResonse(w, "Invalid login or password", http.StatusUnauthorized)
 		return
 	}
@@ -37,9 +36,13 @@ func (h *Handler) authentication(w http.ResponseWriter, r *http.Request) {
 		helpers.ReturnResonse(w, "Couldn't generate token", http.StatusInternalServerError)
 		return
 	}
-	tokenresponse := helpers.TokenResponse{
-		Token: token,
+
+	tokenresponse := helpers.Result{
+		Result: helpers.TokenResponse{
+			Token: token,
+		},
 	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(tokenresponse)

@@ -17,8 +17,3 @@ func (m *MockIndications) GetObjectsByNumLS(ctx context.Context, ls int64) ([]do
 	args := m.Called(ctx, ls)
 	return args.Get(0).([]domain.LS), args.Error(1)
 }
-
-// func TestHandler_GetObjectsByNumLS(t *testing.T) {
-// 	mockService := new(MockIndications)
-// 	handler := rest.NewHandler(mockService)
-// }

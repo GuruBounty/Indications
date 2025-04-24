@@ -60,9 +60,16 @@ func (h *Handler) SetMeterIndicationByGuid(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	response := helpers.SuscessResponse{
-		ID:      strconv.FormatInt(1234, 10),
-		Message: "true",
+	// response := helpers.SuscessResponse{
+	// 	ID:      strconv.FormatInt(1234, 10),
+	// 	Message: "true",
+	// }
+
+	response := helpers.Result{
+		Result: helpers.SuscessResponse{
+			ID:      strconv.FormatInt(id, 10),
+			Message: "true",
+		},
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")

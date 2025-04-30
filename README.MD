@@ -62,7 +62,7 @@ __Authentication Process:__
               }
             ]
           }
-          ```
+        ```
     - Possible errors:
       -  Missing token (HTTP 401): 
             ```json

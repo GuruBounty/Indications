@@ -3,7 +3,7 @@
 # Indications
 
 ## Why did you build it?
-I developed this project as a learning exercise to deepen my understanding of the Go programming language and its application in building robust REST APIs. I gained hands-on experience in implementing key API features such as authentication, data retrieval, and data submission. I also explored best practices for error handling, security, and database integration. The process allowed me to enhance my skills in designing scalable and efficient API architectures.
+I developed this project as a learning exercise to deepen my understanding of the Go programming language and its application in building robust REST APIs.  I based it on a real-life project that I had implemented in another programming language. I gained hands-on experience in implementing key API features such as authentication, data retrieval, and data submission. I also explored best practices for error handling, security, and database integration. The process allowed me to enhance my skills in designing scalable and efficient API architectures.
 
 ## Description
 This REST API, developed in Go, provides secure and reliable access to metering data for electrical devices, utilizing token-based authentication.
